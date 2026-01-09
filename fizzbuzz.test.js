@@ -94,4 +94,73 @@ describe('FizzBuzz', () => {
       expect(fizzbuzz(15)).toBe('Fizz'); // これは失敗する（正しくは"FizzBuzz"）
     });
   });
+
+  describe('エラーハンドリング', () => {
+    describe('引数が未定義またはnull', () => {
+      test('引数なしで呼び出すとエラーをスローする', () => {
+        expect(() => fizzbuzz()).toThrow('引数が指定されていません');
+      });
+
+      test('nullを渡すとエラーをスローする', () => {
+        expect(() => fizzbuzz(null)).toThrow('引数が指定されていません');
+      });
+
+      test('undefinedを渡すとエラーをスローする', () => {
+        expect(() => fizzbuzz(undefined)).toThrow('引数が指定されていません');
+      });
+    });
+
+    describe('数値以外の入力', () => {
+      test('文字列を渡すとTypeErrorをスローする', () => {
+        expect(() => fizzbuzz('abc')).toThrow(TypeError);
+        expect(() => fizzbuzz('abc')).toThrow('引数は数値である必要があります');
+      });
+
+      test('文字列の数字を渡すとTypeErrorをスローする', () => {
+        expect(() => fizzbuzz('123')).toThrow(TypeError);
+      });
+
+      test('オブジェクトを渡すとTypeErrorをスローする', () => {
+        expect(() => fizzbuzz({})).toThrow(TypeError);
+      });
+
+      test('配列を渡すとTypeErrorをスローする', () => {
+        expect(() => fizzbuzz([1, 2, 3])).toThrow(TypeError);
+      });
+
+      test('booleanを渡すとTypeErrorをスローする', () => {
+        expect(() => fizzbuzz(true)).toThrow(TypeError);
+      });
+
+      test('NaNを渡すとTypeErrorをスローする', () => {
+        expect(() => fizzbuzz(NaN)).toThrow(TypeError);
+      });
+    });
+
+    describe('整数以外の数値', () => {
+      test('小数を渡すとTypeErrorをスローする', () => {
+        expect(() => fizzbuzz(3.14)).toThrow(TypeError);
+        expect(() => fizzbuzz(3.14)).toThrow('引数は整数である必要があります');
+      });
+
+      test('負の小数を渡すとTypeErrorをスローする', () => {
+        expect(() => fizzbuzz(-2.5)).toThrow(TypeError);
+      });
+    });
+
+    describe('範囲外の値', () => {
+      test('0を渡すとRangeErrorをスローする', () => {
+        expect(() => fizzbuzz(0)).toThrow(RangeError);
+        expect(() => fizzbuzz(0)).toThrow('引数は正の整数である必要があります');
+      });
+
+      test('負の整数を渡すとRangeErrorをスローする', () => {
+        expect(() => fizzbuzz(-1)).toThrow(RangeError);
+      });
+
+      test('負の数を渡すとRangeErrorをスローする', () => {
+        expect(() => fizzbuzz(-10)).toThrow(RangeError);
+      });
+    });
+  });
 });
