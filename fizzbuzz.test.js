@@ -157,10 +157,6 @@ describe('FizzBuzz', () => {
       test('負の整数を渡すとRangeErrorをスローする', () => {
         expect(() => fizzbuzz(-1)).toThrow(RangeError);
       });
-
-      test('負の数を渡すとRangeErrorをスローする', () => {
-        expect(() => fizzbuzz(-10)).toThrow(RangeError);
-      });
     });
   });
 });
